@@ -58,11 +58,11 @@ const AdminLayout = () => {
           </SidebarHeader>
           <SidebarContent>
             <SidebarGroup>
-              <SidebarGroupLabel>Main</SidebarGroupLabel>
+              <SidebarGroupLabel className="text-white opacity-80">Main</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild>
+                    <SidebarMenuButton asChild className="text-white hover:text-white">
                       <Link to="/admin">
                         <LayoutDashboard className="h-5 w-5 mr-2" />
                         <span>Dashboard</span>
@@ -70,7 +70,7 @@ const AdminLayout = () => {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild>
+                    <SidebarMenuButton asChild className="text-white hover:text-white">
                       <Link to="/admin/articles">
                         <FileText className="h-5 w-5 mr-2" />
                         <span>Articles</span>
@@ -78,7 +78,7 @@ const AdminLayout = () => {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild>
+                    <SidebarMenuButton asChild className="text-white hover:text-white">
                       <Link to="/admin/articles/create">
                         <PlusCircle className="h-5 w-5 mr-2" />
                         <span>Create Article</span>
@@ -86,7 +86,7 @@ const AdminLayout = () => {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild>
+                    <SidebarMenuButton asChild className="text-white hover:text-white">
                       <Link to="/admin/reported">
                         <AlertTriangle className="h-5 w-5 mr-2" />
                         <span>Reported Content</span>
@@ -94,7 +94,7 @@ const AdminLayout = () => {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild>
+                    <SidebarMenuButton asChild className="text-white hover:text-white">
                       <Link to="/admin/comments">
                         <MessageSquare className="h-5 w-5 mr-2" />
                         <span>Comments</span>
@@ -109,7 +109,7 @@ const AdminLayout = () => {
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild>
+                    <SidebarMenuButton asChild className="text-white hover:text-white">
                       <Link to="/">
                         <Home className="h-5 w-5 mr-2" />
                         <span>View Site</span>
@@ -117,7 +117,7 @@ const AdminLayout = () => {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton onClick={handleLogout}>
+                    <SidebarMenuButton onClick={handleLogout} className="text-white hover:text-white">
                       <LogOut className="h-5 w-5 mr-2" />
                       <span>Logout</span>
                     </SidebarMenuButton>
