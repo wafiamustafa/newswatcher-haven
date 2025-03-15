@@ -48,21 +48,21 @@ const AdminLayout = () => {
     <SidebarProvider>
       <div className="min-h-screen w-full flex">
         {/* Sidebar */}
-        <Sidebar className="hidden md:flex bg-news-primary text-white">
+        <Sidebar className="hidden md:flex bg-news-primary">
           <SidebarHeader>
             <div className="p-4">
-              <Link to="/" className="text-xl font-bold flex items-center gap-2 text-white">
+              <Link to="/" className="text-xl font-bold flex items-center gap-2 text-black">
                 NewsWatcher
               </Link>
             </div>
           </SidebarHeader>
           <SidebarContent>
             <SidebarGroup>
-              <SidebarGroupLabel className="text-white opacity-80">Main</SidebarGroupLabel>
+              <SidebarGroupLabel className="text-black opacity-80">Main</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild className="text-white hover:text-white">
+                    <SidebarMenuButton asChild className="text-black hover:text-black">
                       <Link to="/admin">
                         <LayoutDashboard className="h-5 w-5 mr-2" />
                         <span>Dashboard</span>
@@ -70,7 +70,7 @@ const AdminLayout = () => {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild className="text-white hover:text-white">
+                    <SidebarMenuButton asChild className="text-black hover:text-black">
                       <Link to="/admin/articles">
                         <FileText className="h-5 w-5 mr-2" />
                         <span>Articles</span>
@@ -78,7 +78,7 @@ const AdminLayout = () => {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild className="text-white hover:text-white">
+                    <SidebarMenuButton asChild className="text-black hover:text-black">
                       <Link to="/admin/articles/create">
                         <PlusCircle className="h-5 w-5 mr-2" />
                         <span>Create Article</span>
@@ -86,7 +86,7 @@ const AdminLayout = () => {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild className="text-white hover:text-white">
+                    <SidebarMenuButton asChild className="text-black hover:text-black">
                       <Link to="/admin/reported">
                         <AlertTriangle className="h-5 w-5 mr-2" />
                         <span>Reported Content</span>
@@ -94,7 +94,7 @@ const AdminLayout = () => {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild className="text-white hover:text-white">
+                    <SidebarMenuButton asChild className="text-black hover:text-black">
                       <Link to="/admin/comments">
                         <MessageSquare className="h-5 w-5 mr-2" />
                         <span>Comments</span>
@@ -109,7 +109,7 @@ const AdminLayout = () => {
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild className="text-white hover:text-white">
+                    <SidebarMenuButton asChild className="text-black hover:text-black">
                       <Link to="/">
                         <Home className="h-5 w-5 mr-2" />
                         <span>View Site</span>
@@ -117,7 +117,7 @@ const AdminLayout = () => {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton onClick={handleLogout} className="text-white hover:text-white">
+                    <SidebarMenuButton onClick={handleLogout} className="text-black hover:text-black">
                       <LogOut className="h-5 w-5 mr-2" />
                       <span>Logout</span>
                     </SidebarMenuButton>
@@ -129,14 +129,14 @@ const AdminLayout = () => {
         </Sidebar>
         
         {/* Mobile Header */}
-        <div className="md:hidden fixed top-0 left-0 right-0 bg-news-primary text-white z-50 border-b border-news-primary/20">
+        <div className="md:hidden fixed top-0 left-0 right-0 bg-news-primary z-50 border-b border-news-primary/20">
           <div className="px-4 py-3 flex items-center justify-between">
             <Link to="/" className="text-xl font-bold">NewsWatcher</Link>
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-white hover:bg-news-primary/50"
+              className="text-black hover:bg-news-primary/50"
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
@@ -148,7 +148,7 @@ const AdminLayout = () => {
               <nav className="px-4 py-3 space-y-2">
                 <Link 
                   to="/admin" 
-                  className="flex items-center p-2 hover:bg-news-primary/50 rounded-md"
+                  className="flex items-center p-2 hover:bg-news-primary/50 rounded-md text-black"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <LayoutDashboard className="h-5 w-5 mr-2" />
@@ -156,7 +156,7 @@ const AdminLayout = () => {
                 </Link>
                 <Link 
                   to="/admin/articles" 
-                  className="flex items-center p-2 hover:bg-news-primary/50 rounded-md"
+                  className="flex items-center p-2 hover:bg-news-primary/50 rounded-md text-black"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <FileText className="h-5 w-5 mr-2" />
@@ -164,7 +164,7 @@ const AdminLayout = () => {
                 </Link>
                 <Link 
                   to="/admin/articles/create" 
-                  className="flex items-center p-2 hover:bg-news-primary/50 rounded-md"
+                  className="flex items-center p-2 hover:bg-news-primary/50 rounded-md text-black"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <PlusCircle className="h-5 w-5 mr-2" />
@@ -172,7 +172,7 @@ const AdminLayout = () => {
                 </Link>
                 <Link 
                   to="/admin/reported" 
-                  className="flex items-center p-2 hover:bg-news-primary/50 rounded-md"
+                  className="flex items-center p-2 hover:bg-news-primary/50 rounded-md text-black"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <AlertTriangle className="h-5 w-5 mr-2" />
@@ -180,7 +180,7 @@ const AdminLayout = () => {
                 </Link>
                 <Link 
                   to="/admin/comments" 
-                  className="flex items-center p-2 hover:bg-news-primary/50 rounded-md"
+                  className="flex items-center p-2 hover:bg-news-primary/50 rounded-md text-black"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <MessageSquare className="h-5 w-5 mr-2" />
@@ -188,7 +188,7 @@ const AdminLayout = () => {
                 </Link>
                 <Link 
                   to="/" 
-                  className="flex items-center p-2 hover:bg-news-primary/50 rounded-md"
+                  className="flex items-center p-2 hover:bg-news-primary/50 rounded-md text-black"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <Home className="h-5 w-5 mr-2" />
@@ -196,7 +196,7 @@ const AdminLayout = () => {
                 </Link>
                 <button 
                   onClick={handleLogout}
-                  className="flex items-center p-2 hover:bg-news-primary/50 rounded-md w-full text-left"
+                  className="flex items-center p-2 hover:bg-news-primary/50 rounded-md w-full text-left text-black"
                 >
                   <LogOut className="h-5 w-5 mr-2" />
                   <span>Logout</span>
@@ -219,4 +219,3 @@ const AdminLayout = () => {
 };
 
 export default AdminLayout;
-
