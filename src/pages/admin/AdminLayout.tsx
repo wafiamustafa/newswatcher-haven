@@ -207,7 +207,7 @@ const AdminLayout = () => {
         </div>
         
         {/* Main Content */}
-        <div className="flex-1 flex flex-col md:ml-64">
+        <div className="flex-1 flex flex-col">
           <div className="md:hidden h-14"></div> {/* Spacer for mobile header */}
           <main className="flex-1 p-4 md:p-8 bg-gray-50">
             <Outlet />
@@ -219,3 +219,4 @@ const AdminLayout = () => {
 };
 
 export default AdminLayout;
+
