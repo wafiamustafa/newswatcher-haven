@@ -56,7 +56,7 @@ const CategoryPage = () => {
               {category}
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Explore the latest news and updates in the {category} category.
+              {t("article.explore")} {category}.
             </p>
           </header>
           
@@ -70,9 +70,9 @@ const CategoryPage = () => {
           ) : (
             <div className="text-center py-16">
               <Newspaper className="mx-auto h-16 w-16 text-muted-foreground mb-4" />
-              <h2 className="text-2xl font-headline font-semibold mb-2">No Articles Found</h2>
+              <h2 className="text-2xl font-headline font-semibold mb-2">{t("article.noArticlesFound")}</h2>
               <p className="text-muted-foreground mb-6">
-                There are currently no articles in the {category} category.
+                {t("article.noArticlesInCategory")} {category}.
               </p>
               <Link to="/" className="text-news-primary hover:underline">
                 {t("common.home")}

@@ -22,6 +22,7 @@ import {
   TrendingUp
 } from "lucide-react";
 import { getArticles, getTotalViews, getTotalComments, getReportedCount, getReportedArticles } from "@/services/articleService";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Sample chart data
 const viewsData = [
@@ -45,11 +46,11 @@ const engagementData = [
 ];
 
 const categoryData = [
-  { name: "Technology", articles: 12, views: 3240 },
-  { name: "Business", articles: 8, views: 2160 },
-  { name: "Health", articles: 10, views: 2700 },
-  { name: "Environment", articles: 6, views: 1620 },
-  { name: "Entertainment", articles: 14, views: 3780 },
+  { name: "التقنية", articles: 12, views: 3240 },
+  { name: "الأعمال", articles: 8, views: 2160 },
+  { name: "الصحة", articles: 10, views: 2700 },
+  { name: "البيئة", articles: 6, views: 1620 },
+  { name: "الترفيه", articles: 14, views: 3780 },
 ];
 
 const AdminDashboard = () => {
@@ -58,6 +59,7 @@ const AdminDashboard = () => {
   const [totalArticles, setTotalArticles] = useState(0);
   const [reportedCount, setReportedCount] = useState(0);
   const [loading, setLoading] = useState(true);
+  const { t, dir } = useLanguage();
   
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -78,64 +80,64 @@ const AdminDashboard = () => {
   }, []);
   
   if (loading) {
-    return <div className="flex items-center justify-center h-[80vh]">Loading dashboard data...</div>;
+    return <div className="flex items-center justify-center h-[80vh]">{t("common.loading")}</div>;
   }
   
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+    <div className="text-right">
+      <h1 className="text-3xl font-bold mb-6">{t("admin.dashboard")}</h1>
       
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <Card>
+        <Card className="text-right">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Total Views</CardTitle>
+            <CardTitle className="text-sm font-medium">{t("admin.totalViews")}</CardTitle>
             <Eye className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{totalViews.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground flex items-center mt-1">
-              <TrendingUp className="h-3 w-3 mr-1 text-green-500" />
+              <TrendingUp className="h-3 w-3 ml-1 rtl-flip text-green-500" />
               <span className="text-green-500 font-medium">12%</span>
-              <span className="ml-1">from last week</span>
+              <span className="mr-1">{t("admin.fromLastWeek")}</span>
             </p>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="text-right">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Total Comments</CardTitle>
+            <CardTitle className="text-sm font-medium">{t("admin.totalComments")}</CardTitle>
             <MessageSquare className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{totalComments.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground flex items-center mt-1">
-              <TrendingUp className="h-3 w-3 mr-1 text-green-500" />
+              <TrendingUp className="h-3 w-3 ml-1 rtl-flip text-green-500" />
               <span className="text-green-500 font-medium">8%</span>
-              <span className="ml-1">from last week</span>
+              <span className="mr-1">{t("admin.fromLastWeek")}</span>
             </p>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="text-right">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Total Articles</CardTitle>
+            <CardTitle className="text-sm font-medium">{t("admin.totalArticles")}</CardTitle>
             <FileText className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{totalArticles}</div>
             <p className="text-xs text-muted-foreground mt-1">
-              Updated just now
+              {t("admin.updatedJustNow")}
             </p>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="text-right">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Reported Content</CardTitle>
+            <CardTitle className="text-sm font-medium">{t("admin.reportedContent")}</CardTitle>
             <AlertTriangle className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{reportedCount}</div>
             <p className="text-xs text-muted-foreground mt-1">
-              Needs attention
+              {t("admin.needsAttention")}
             </p>
           </CardContent>
         </Card>
@@ -143,18 +145,18 @@ const AdminDashboard = () => {
       
       {/* Charts */}
       <Tabs defaultValue="overview" className="space-y-4">
-        <TabsList>
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="engagement">Engagement</TabsTrigger>
-          <TabsTrigger value="categories">Categories</TabsTrigger>
+        <TabsList className="rtl-space-reverse">
+          <TabsTrigger value="overview">نظرة عامة</TabsTrigger>
+          <TabsTrigger value="engagement">التفاعل</TabsTrigger>
+          <TabsTrigger value="categories">التصنيفات</TabsTrigger>
         </TabsList>
         
         <TabsContent value="overview" className="space-y-4">
-          <Card>
+          <Card className="text-right">
             <CardHeader>
-              <CardTitle>Views Overview</CardTitle>
+              <CardTitle>نظرة عامة للمشاهدات</CardTitle>
               <CardDescription>
-                Daily view statistics for the past week
+                إحصائيات المشاهدات اليومية للأسبوع الماضي
               </CardDescription>
             </CardHeader>
             <CardContent className="h-80">
@@ -171,6 +173,7 @@ const AdminDashboard = () => {
                     stroke="#1a365d" 
                     activeDot={{ r: 8 }} 
                     strokeWidth={2}
+                    name="المشاهدات"
                   />
                 </LineChart>
               </ResponsiveContainer>
@@ -179,11 +182,11 @@ const AdminDashboard = () => {
         </TabsContent>
         
         <TabsContent value="engagement" className="space-y-4">
-          <Card>
+          <Card className="text-right">
             <CardHeader>
-              <CardTitle>User Engagement</CardTitle>
+              <CardTitle>تفاعل المستخدمين</CardTitle>
               <CardDescription>
-                Views vs. Comments for the past week
+                المشاهدات مقابل التعليقات للأسبوع الماضي
               </CardDescription>
             </CardHeader>
             <CardContent className="h-80">
@@ -194,8 +197,8 @@ const AdminDashboard = () => {
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="views" fill="#1a365d" />
-                  <Bar dataKey="comments" fill="#fbbf24" />
+                  <Bar dataKey="views" fill="#1a365d" name="المشاهدات" />
+                  <Bar dataKey="comments" fill="#fbbf24" name="التعليقات" />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
@@ -203,11 +206,11 @@ const AdminDashboard = () => {
         </TabsContent>
         
         <TabsContent value="categories" className="space-y-4">
-          <Card>
+          <Card className="text-right">
             <CardHeader>
-              <CardTitle>Category Performance</CardTitle>
+              <CardTitle>أداء التصنيفات</CardTitle>
               <CardDescription>
-                Articles and views by category
+                المقالات والمشاهدات حسب التصنيف
               </CardDescription>
             </CardHeader>
             <CardContent className="h-80">
@@ -219,8 +222,8 @@ const AdminDashboard = () => {
                   <YAxis yAxisId="right" orientation="right" stroke="#fbbf24" />
                   <Tooltip />
                   <Legend />
-                  <Bar yAxisId="left" dataKey="articles" fill="#1a365d" name="Articles" />
-                  <Bar yAxisId="right" dataKey="views" fill="#fbbf24" name="Views" />
+                  <Bar yAxisId="left" dataKey="articles" fill="#1a365d" name="المقالات" />
+                  <Bar yAxisId="right" dataKey="views" fill="#fbbf24" name="المشاهدات" />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
