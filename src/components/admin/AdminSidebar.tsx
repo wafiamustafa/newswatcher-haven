@@ -1,15 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { 
-  LayoutDashboard, 
-  FileText, 
-  AlertTriangle, 
-  MessageSquare, 
-  Home, 
-  LogOut, 
-  PlusCircle,
-  Globe
-} from "lucide-react";
+import { Globe, LucideIcon } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -29,6 +20,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { adminNavigation, NavItem } from "@/data/adminNavigation";
 
 interface AdminSidebarProps {
   handleLogout: () => void;
@@ -48,32 +40,42 @@ export const AdminSidebar = ({ handleLogout }: AdminSidebarProps) => {
         </div>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-black opacity-80">{t("common.home")}</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <NavMenuItem to="/admin" icon={<LayoutDashboard className="h-5 w-5 mr-2" />} label={t("admin.dashboard")} />
-              <NavMenuItem to="/admin/articles" icon={<FileText className="h-5 w-5 mr-2" />} label={t("admin.articles")} />
-              <NavMenuItem to="/admin/articles/create" icon={<PlusCircle className="h-5 w-5 mr-2" />} label={t("admin.createArticle")} />
-              <NavMenuItem to="/admin/reported" icon={<AlertTriangle className="h-5 w-5 mr-2" />} label={t("admin.reportedContent")} />
-              <NavMenuItem to="/admin/comments" icon={<MessageSquare className="h-5 w-5 mr-2" />} label={t("admin.comments")} />
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-        
-        <SidebarGroup>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <NavMenuItem to="/" icon={<Home className="h-5 w-5 mr-2" />} label={t("common.viewSite")} />
-              <SidebarMenuItem>
-                <SidebarMenuButton onClick={handleLogout} className="text-black hover:text-black">
-                  <LogOut className="h-5 w-5 mr-2" />
-                  <span>{t("common.logout")}</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {adminNavigation.map((section, index) => (
+          <SidebarGroup key={index}>
+            {section.labelTranslationKey && (
+              <SidebarGroupLabel className="text-black opacity-80">
+                {t(section.labelTranslationKey)}
+              </SidebarGroupLabel>
+            )}
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {section.items.map((item, itemIndex) => {
+                  // Special case for logout button
+                  if (item.translationKey === "common.logout") {
+                    return (
+                      <SidebarMenuItem key={itemIndex}>
+                        <SidebarMenuButton onClick={handleLogout} className="text-black hover:text-black">
+                          <item.icon className="h-5 w-5 mr-2" />
+                          <span>{t(item.translationKey)}</span>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    );
+                  }
+                  
+                  // Regular navigation items
+                  return (
+                    <NavMenuItem 
+                      key={itemIndex}
+                      to={item.to}
+                      icon={<item.icon className="h-5 w-5 mr-2" />}
+                      label={t(item.translationKey)}
+                    />
+                  );
+                })}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ))}
       </SidebarContent>
     </Sidebar>
   );
