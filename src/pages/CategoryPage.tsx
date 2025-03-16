@@ -7,11 +7,13 @@ import ArticleCard from "@/components/articles/ArticleCard";
 import { Badge } from "@/components/ui/badge";
 import { Newspaper } from "lucide-react";
 import { Article, getArticlesByCategory } from "@/services/articleService";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const CategoryPage = () => {
   const { category } = useParams<{ category: string }>();
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
+  const { t, dir } = useLanguage();
   
   useEffect(() => {
     const fetchArticlesByCategory = async () => {
@@ -33,14 +35,14 @@ const CategoryPage = () => {
   
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-xl">Loading articles...</p>
+      <div className="min-h-screen flex items-center justify-center" dir={dir}>
+        <p className="text-xl">{t("common.loading")}</p>
       </div>
     );
   }
   
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col" dir={dir}>
       <Navbar />
       
       <main className="flex-1">
@@ -48,7 +50,7 @@ const CategoryPage = () => {
           {/* Category Header */}
           <header className="text-center mb-12 py-10 border-b">
             <Badge className="mb-4 bg-news-accent text-black font-medium">
-              Category
+              {t("article.category")}
             </Badge>
             <h1 className="text-5xl font-headline font-bold mb-4 capitalize">
               {category}
@@ -73,7 +75,7 @@ const CategoryPage = () => {
                 There are currently no articles in the {category} category.
               </p>
               <Link to="/" className="text-news-primary hover:underline">
-                Return to home page
+                {t("common.home")}
               </Link>
             </div>
           )}

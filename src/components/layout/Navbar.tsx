@@ -139,7 +139,7 @@ const Navbar = () => {
               variant="ghost"
               size="icon"
               className="md:hidden"
-              onClick={() => setIsMobileMenuOpen(!isMenuOpen)}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
@@ -171,7 +171,7 @@ const Navbar = () => {
               <Link 
                 to="/" 
                 className="block px-4 py-2 text-sm hover:bg-muted rounded-md"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => setIsMenuOpen(false)}
               >
                 {t("common.home")}
               </Link>
@@ -180,7 +180,7 @@ const Navbar = () => {
                   key={category}
                   to={`/category/${category.toLowerCase()}`}
                   className="block px-4 py-2 text-sm hover:bg-muted rounded-md"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   {category}
                 </Link>

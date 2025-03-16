@@ -12,7 +12,6 @@ export const enTranslations = {
     dashboard: "Dashboard",
     articles: "Articles",
     createArticle: "Create Article",
-    reportedContent: "Reported Content",
     comments: "Comments",
     totalViews: "Total Views",
     totalComments: "Total Comments",

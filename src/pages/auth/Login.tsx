@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Newspaper, Loader2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,13 +17,14 @@ const Login = () => {
   const { login } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { t, dir } = useLanguage();
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!email || !password) {
       toast({
-        title: "Error",
+        title: t("common.login"),
         description: "Please enter both email and password",
         variant: "destructive"
       });
@@ -60,7 +62,7 @@ const Login = () => {
   };
   
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4" dir={dir}>
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center">
@@ -72,7 +74,7 @@ const Login = () => {
         
         <Card>
           <CardHeader>
-            <CardTitle>Login</CardTitle>
+            <CardTitle>{t("common.login")}</CardTitle>
             <CardDescription>
               Enter your credentials to access the admin dashboard
             </CardDescription>
@@ -119,10 +121,10 @@ const Login = () => {
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Logging in...
+                    {t("common.loading")}
                   </>
                 ) : (
-                  "Login"
+                  t("common.login")
                 )}
               </Button>
             </CardFooter>
@@ -131,7 +133,7 @@ const Login = () => {
         
         <div className="text-center mt-6">
           <Link to="/" className="text-sm text-muted-foreground hover:underline">
-            Return to Home Page
+            {t("common.home")}
           </Link>
         </div>
       </div>

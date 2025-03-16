@@ -18,7 +18,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<Language>(() => {
     const savedLanguage = localStorage.getItem("language") as Language;
-    return savedLanguage || "en";
+    return savedLanguage || "ar"; // Default to Arabic
   });
 
   const translations: Record<Language, Translations> = {

@@ -12,7 +12,6 @@ export const arTranslations = {
     dashboard: "لوحة التحكم",
     articles: "المقالات",
     createArticle: "إنشاء مقالة",
-    reportedContent: "المحتوى المبلغ عنه",
     comments: "التعليقات",
     totalViews: "إجمالي المشاهدات",
     totalComments: "إجمالي التعليقات",

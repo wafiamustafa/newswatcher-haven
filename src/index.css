@@ -95,6 +95,27 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* RTL specific adjustments */
+  [dir="rtl"] .mr-2 {
+    margin-right: 0;
+    margin-left: 0.5rem;
+  }
+  
+  [dir="rtl"] .ml-2 {
+    margin-left: 0;
+    margin-right: 0.5rem;
+  }
+  
+  [dir="rtl"] .space-x-4 > * + * {
+    margin-left: 0;
+    margin-right: 1rem;
+  }
+  
+  [dir="rtl"] .space-x-6 > * + * {
+    margin-left: 0;
+    margin-right: 1.5rem;
+  }
 }
 
 @layer components {
@@ -109,4 +130,24 @@
   .news-subheading {
     @apply font-body text-sm text-muted-foreground md:text-base;
   }
+  
+  /* Additional RTL helpers */
+  .rtl-flip {
+    @apply [dir="rtl"]:scale-x-[-1];
+  }
+  
+  .rtl-space-reverse {
+    @apply [dir="rtl"]:space-x-reverse;
+  }
+}
+
+/* Custom RTL styles */
+[dir="rtl"] .mr-4 {
+  margin-right: 0;
+  margin-left: 1rem;
+}
+
+/* Additional tweaks for specific UI components */
+[dir="rtl"] .dropdown-menu {
+  text-align: right;
 }
