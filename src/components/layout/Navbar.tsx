@@ -9,10 +9,12 @@ import {
   Menu, 
   X, 
   User,
-  LogOut
+  LogOut,
+  Globe
 } from "lucide-react";
 import { getCategories } from "@/services/articleService";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,6 +29,7 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const { user, isAdmin, logout } = useAuth();
+  const { language, setLanguage, t, dir } = useLanguage();
   
   const categories = getCategories();
   
@@ -40,7 +43,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" dir={dir}>
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
@@ -53,7 +56,7 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             <Link to="/" className="text-sm font-medium transition-colors hover:text-primary">
-              Home
+              {t("common.home")}
             </Link>
             {categories.map((category) => (
               <Link 
@@ -71,7 +74,7 @@ const Navbar = () => {
             <form onSubmit={handleSearch} className="hidden md:flex relative w-60">
               <Input
                 type="search"
-                placeholder="Search articles..."
+                placeholder={t("common.search")}
                 className="pr-8"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -86,6 +89,23 @@ const Navbar = () => {
               </Button>
             </form>
             
+            {/* Language Switcher */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Globe className="h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => setLanguage("en")}>
+                  English {language === "en" && "✓"}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLanguage("ar")}>
+                  العربية {language === "ar" && "✓"}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
             {/* Auth Buttons */}
             {user ? (
               <DropdownMenu>
@@ -95,22 +115,22 @@ const Navbar = () => {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuLabel>{t("common.home")}</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   {isAdmin && (
                     <DropdownMenuItem onClick={() => navigate('/admin')}>
-                      Admin Dashboard
+                      {t("admin.dashboard")}
                     </DropdownMenuItem>
                   )}
                   <DropdownMenuItem onClick={logout}>
                     <LogOut className="mr-2 h-4 w-4" />
-                    <span>Logout</span>
+                    <span>{t("common.logout")}</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
               <Button variant="outline" size="sm" asChild>
-                <Link to="/login">Log In</Link>
+                <Link to="/login">{t("common.login")}</Link>
               </Button>
             )}
             
@@ -119,7 +139,7 @@ const Navbar = () => {
               variant="ghost"
               size="icon"
               className="md:hidden"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={() => setIsMobileMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
@@ -132,7 +152,7 @@ const Navbar = () => {
             <form onSubmit={handleSearch} className="flex relative">
               <Input
                 type="search"
-                placeholder="Search articles..."
+                placeholder={t("common.search")}
                 className="pr-8 w-full"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -151,16 +171,16 @@ const Navbar = () => {
               <Link 
                 to="/" 
                 className="block px-4 py-2 text-sm hover:bg-muted rounded-md"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => setIsMobileMenuOpen(false)}
               >
-                Home
+                {t("common.home")}
               </Link>
               {categories.map((category) => (
                 <Link 
                   key={category}
                   to={`/category/${category.toLowerCase()}`}
                   className="block px-4 py-2 text-sm hover:bg-muted rounded-md"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {category}
                 </Link>

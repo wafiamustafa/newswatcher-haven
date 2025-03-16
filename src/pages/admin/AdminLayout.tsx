@@ -10,7 +10,8 @@ import {
   LogOut, 
   PlusCircle,
   Menu,
-  X
+  X,
+  Globe
 } from "lucide-react";
 import {
   Sidebar,
@@ -27,10 +28,18 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const AdminLayout = () => {
   const { user, isAdmin, logout } = useAuth();
+  const { language, setLanguage, t, dir } = useLanguage();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
@@ -46,26 +55,41 @@ const AdminLayout = () => {
   
   return (
     <SidebarProvider>
-      <div className="min-h-screen w-full flex">
+      <div className="min-h-screen w-full flex" dir={dir}>
         {/* Sidebar */}
         <Sidebar className="hidden md:flex bg-news-primary">
           <SidebarHeader>
-            <div className="p-4">
+            <div className="p-4 flex items-center justify-between">
               <Link to="/" className="text-xl font-bold flex items-center gap-2 text-black">
                 NewsWatcher
               </Link>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="text-black">
+                    <Globe className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onClick={() => setLanguage("en")}>
+                    English {language === "en" && "✓"}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLanguage("ar")}>
+                    العربية {language === "ar" && "✓"}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </SidebarHeader>
           <SidebarContent>
             <SidebarGroup>
-              <SidebarGroupLabel className="text-black opacity-80">Main</SidebarGroupLabel>
+              <SidebarGroupLabel className="text-black opacity-80">{t("common.home")}</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild className="text-black hover:text-black">
                       <Link to="/admin">
                         <LayoutDashboard className="h-5 w-5 mr-2" />
-                        <span>Dashboard</span>
+                        <span>{t("admin.dashboard")}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -73,7 +97,7 @@ const AdminLayout = () => {
                     <SidebarMenuButton asChild className="text-black hover:text-black">
                       <Link to="/admin/articles">
                         <FileText className="h-5 w-5 mr-2" />
-                        <span>Articles</span>
+                        <span>{t("admin.articles")}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -81,7 +105,7 @@ const AdminLayout = () => {
                     <SidebarMenuButton asChild className="text-black hover:text-black">
                       <Link to="/admin/articles/create">
                         <PlusCircle className="h-5 w-5 mr-2" />
-                        <span>Create Article</span>
+                        <span>{t("admin.createArticle")}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -89,7 +113,7 @@ const AdminLayout = () => {
                     <SidebarMenuButton asChild className="text-black hover:text-black">
                       <Link to="/admin/reported">
                         <AlertTriangle className="h-5 w-5 mr-2" />
-                        <span>Reported Content</span>
+                        <span>{t("admin.reportedContent")}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -97,7 +121,7 @@ const AdminLayout = () => {
                     <SidebarMenuButton asChild className="text-black hover:text-black">
                       <Link to="/admin/comments">
                         <MessageSquare className="h-5 w-5 mr-2" />
-                        <span>Comments</span>
+                        <span>{t("admin.comments")}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -112,14 +136,14 @@ const AdminLayout = () => {
                     <SidebarMenuButton asChild className="text-black hover:text-black">
                       <Link to="/">
                         <Home className="h-5 w-5 mr-2" />
-                        <span>View Site</span>
+                        <span>{t("common.viewSite")}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton onClick={handleLogout} className="text-black hover:text-black">
                       <LogOut className="h-5 w-5 mr-2" />
-                      <span>Logout</span>
+                      <span>{t("common.logout")}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>
@@ -132,14 +156,31 @@ const AdminLayout = () => {
         <div className="md:hidden fixed top-0 left-0 right-0 bg-news-primary z-50 border-b border-news-primary/20">
           <div className="px-4 py-3 flex items-center justify-between">
             <Link to="/" className="text-xl font-bold">NewsWatcher</Link>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-black hover:bg-news-primary/50"
-            >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
+            <div className="flex items-center gap-2">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="text-black">
+                    <Globe className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onClick={() => setLanguage("en")}>
+                    English {language === "en" && "✓"}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLanguage("ar")}>
+                    العربية {language === "ar" && "✓"}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-black hover:bg-news-primary/50"
+              >
+                {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </Button>
+            </div>
           </div>
           
           {/* Mobile Menu */}
@@ -152,7 +193,7 @@ const AdminLayout = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <LayoutDashboard className="h-5 w-5 mr-2" />
-                  <span>Dashboard</span>
+                  <span>{t("admin.dashboard")}</span>
                 </Link>
                 <Link 
                   to="/admin/articles" 
@@ -160,7 +201,7 @@ const AdminLayout = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <FileText className="h-5 w-5 mr-2" />
-                  <span>Articles</span>
+                  <span>{t("admin.articles")}</span>
                 </Link>
                 <Link 
                   to="/admin/articles/create" 
@@ -168,7 +209,7 @@ const AdminLayout = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <PlusCircle className="h-5 w-5 mr-2" />
-                  <span>Create Article</span>
+                  <span>{t("admin.createArticle")}</span>
                 </Link>
                 <Link 
                   to="/admin/reported" 
@@ -176,7 +217,7 @@ const AdminLayout = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <AlertTriangle className="h-5 w-5 mr-2" />
-                  <span>Reported Content</span>
+                  <span>{t("admin.reportedContent")}</span>
                 </Link>
                 <Link 
                   to="/admin/comments" 
@@ -184,7 +225,7 @@ const AdminLayout = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <MessageSquare className="h-5 w-5 mr-2" />
-                  <span>Comments</span>
+                  <span>{t("admin.comments")}</span>
                 </Link>
                 <Link 
                   to="/" 
@@ -192,14 +233,14 @@ const AdminLayout = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <Home className="h-5 w-5 mr-2" />
-                  <span>View Site</span>
+                  <span>{t("common.viewSite")}</span>
                 </Link>
                 <button 
                   onClick={handleLogout}
                   className="flex items-center p-2 hover:bg-news-primary/50 rounded-md w-full text-left text-black"
                 >
                   <LogOut className="h-5 w-5 mr-2" />
-                  <span>Logout</span>
+                  <span>{t("common.logout")}</span>
                 </button>
               </nav>
             </div>
