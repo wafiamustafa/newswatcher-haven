@@ -27,12 +27,11 @@ const AdminLayout = () => {
         {/* Desktop Sidebar */}
         <AdminSidebar handleLogout={handleLogout} />
         
-        {/* Mobile Header & Menu */}
-        <AdminMobileMenu handleLogout={handleLogout} />
-        
         {/* Main Content */}
         <div className="flex-1 flex flex-col overflow-x-hidden">
-          <div className="md:hidden h-14"></div> {/* Spacer for mobile header */}
+          {/* Mobile Header & Menu */}
+          <AdminMobileMenu handleLogout={handleLogout} />
+          
           <main className="flex-1 p-4 md:p-8 bg-gray-50 w-full max-w-full">
             <Outlet />
           </main>
