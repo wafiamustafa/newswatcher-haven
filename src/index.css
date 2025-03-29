@@ -130,14 +130,20 @@
   .news-subheading {
     @apply font-body text-sm text-muted-foreground md:text-base;
   }
-  
+}
+
+@layer utilities {
   /* Additional RTL helpers */
   .rtl-flip {
-    @apply [dir="rtl"]:scale-x-[-1];
+    @apply scale-x-100;
+  }
+  
+  [dir="rtl"] .rtl-flip {
+    @apply scale-x-[-1];
   }
   
   .rtl-space-reverse {
-    @apply [dir="rtl"]:space-x-reverse;
+    @apply space-x-reverse;
   }
 }
 
