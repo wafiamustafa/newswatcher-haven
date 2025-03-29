@@ -27,10 +27,10 @@ interface AdminSidebarProps {
 }
 
 export const AdminSidebar = ({ handleLogout }: AdminSidebarProps) => {
-  const { language, setLanguage, t } = useLanguage();
+  const { language, setLanguage, t, dir } = useLanguage();
   
   return (
-    <Sidebar className="hidden md:flex bg-news-primary">
+    <Sidebar className="hidden md:flex bg-news-primary" side={dir === "rtl" ? "right" : "left"}>
       <SidebarHeader>
         <div className="p-4 flex items-center justify-between">
           <Link to="/" className="text-xl font-bold flex items-center gap-2 text-black">

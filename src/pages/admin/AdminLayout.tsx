@@ -23,7 +23,7 @@ const AdminLayout = () => {
   
   return (
     <SidebarProvider>
-      <div className="min-h-screen w-full flex overflow-hidden" dir={dir}>
+      <div className={`min-h-screen w-full flex overflow-hidden ${dir === "rtl" ? "flex-row-reverse" : ""}`} dir={dir}>
         {/* Desktop Sidebar */}
         <AdminSidebar handleLogout={handleLogout} />
         
