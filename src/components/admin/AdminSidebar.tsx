@@ -55,7 +55,7 @@ export const AdminSidebar = ({ handleLogout }: AdminSidebarProps) => {
                     return (
                       <SidebarMenuItem key={itemIndex}>
                         <SidebarMenuButton onClick={handleLogout} className="text-black hover:text-black">
-                          <item.icon className="h-5 w-5 mr-2" />
+                          <item.icon className={`h-5 w-5 ${dir === "rtl" ? "ml-2" : "mr-2"}`} />
                           <span>{t(item.translationKey)}</span>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
@@ -67,7 +67,7 @@ export const AdminSidebar = ({ handleLogout }: AdminSidebarProps) => {
                     <NavMenuItem 
                       key={itemIndex}
                       to={item.to}
-                      icon={<item.icon className="h-5 w-5 mr-2" />}
+                      icon={<item.icon className={`h-5 w-5 ${dir === "rtl" ? "ml-2" : "mr-2"}`} />}
                       label={t(item.translationKey)}
                     />
                   );
