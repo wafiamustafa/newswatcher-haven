@@ -1,5 +1,4 @@
 
-import { useEffect } from "react";
 import { Outlet, Navigate, useNavigate } from "react-router-dom";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { useAuth } from "@/contexts/AuthContext";
@@ -24,7 +23,7 @@ const AdminLayout = () => {
   
   return (
     <SidebarProvider>
-      <div className="min-h-screen w-full flex" dir={dir}>
+      <div className="min-h-screen w-full flex overflow-hidden" dir={dir}>
         {/* Desktop Sidebar */}
         <AdminSidebar handleLogout={handleLogout} />
         
@@ -32,9 +31,9 @@ const AdminLayout = () => {
         <AdminMobileMenu handleLogout={handleLogout} />
         
         {/* Main Content */}
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col overflow-x-hidden">
           <div className="md:hidden h-14"></div> {/* Spacer for mobile header */}
-          <main className="flex-1 p-4 md:p-8 bg-gray-50">
+          <main className="flex-1 p-4 md:p-8 bg-gray-50 w-full max-w-full">
             <Outlet />
           </main>
         </div>

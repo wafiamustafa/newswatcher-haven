@@ -84,12 +84,12 @@ const AdminDashboard = () => {
   }
   
   return (
-    <div className="text-right">
+    <div className="w-full">
       <h1 className="text-3xl font-bold mb-6">{t("admin.dashboard")}</h1>
       
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <Card className="text-right">
+        <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">{t("admin.totalViews")}</CardTitle>
             <Eye className="h-4 w-4 text-muted-foreground" />
@@ -103,7 +103,7 @@ const AdminDashboard = () => {
             </p>
           </CardContent>
         </Card>
-        <Card className="text-right">
+        <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">{t("admin.totalComments")}</CardTitle>
             <MessageSquare className="h-4 w-4 text-muted-foreground" />
@@ -117,7 +117,7 @@ const AdminDashboard = () => {
             </p>
           </CardContent>
         </Card>
-        <Card className="text-right">
+        <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">{t("admin.totalArticles")}</CardTitle>
             <FileText className="h-4 w-4 text-muted-foreground" />
@@ -129,7 +129,7 @@ const AdminDashboard = () => {
             </p>
           </CardContent>
         </Card>
-        <Card className="text-right">
+        <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">{t("admin.reportedContent")}</CardTitle>
             <AlertTriangle className="h-4 w-4 text-muted-foreground" />
@@ -146,17 +146,17 @@ const AdminDashboard = () => {
       {/* Charts */}
       <Tabs defaultValue="overview" className="space-y-4">
         <TabsList className="rtl-space-reverse">
-          <TabsTrigger value="overview">نظرة عامة</TabsTrigger>
-          <TabsTrigger value="engagement">التفاعل</TabsTrigger>
-          <TabsTrigger value="categories">التصنيفات</TabsTrigger>
+          <TabsTrigger value="overview">{t("admin.overview")}</TabsTrigger>
+          <TabsTrigger value="engagement">{t("admin.engagement")}</TabsTrigger>
+          <TabsTrigger value="categories">{t("admin.categories")}</TabsTrigger>
         </TabsList>
         
         <TabsContent value="overview" className="space-y-4">
-          <Card className="text-right">
+          <Card>
             <CardHeader>
-              <CardTitle>نظرة عامة للمشاهدات</CardTitle>
+              <CardTitle>{t("admin.viewsOverview")}</CardTitle>
               <CardDescription>
-                إحصائيات المشاهدات اليومية للأسبوع الماضي
+                {t("admin.dailyStats")}
               </CardDescription>
             </CardHeader>
             <CardContent className="h-80">
@@ -173,7 +173,7 @@ const AdminDashboard = () => {
                     stroke="#1a365d" 
                     activeDot={{ r: 8 }} 
                     strokeWidth={2}
-                    name="المشاهدات"
+                    name={t("admin.views")}
                   />
                 </LineChart>
               </ResponsiveContainer>
@@ -182,11 +182,11 @@ const AdminDashboard = () => {
         </TabsContent>
         
         <TabsContent value="engagement" className="space-y-4">
-          <Card className="text-right">
+          <Card>
             <CardHeader>
-              <CardTitle>تفاعل المستخدمين</CardTitle>
+              <CardTitle>{t("admin.userEngagement")}</CardTitle>
               <CardDescription>
-                المشاهدات مقابل التعليقات للأسبوع الماضي
+                {t("admin.viewsVsComments")}
               </CardDescription>
             </CardHeader>
             <CardContent className="h-80">
@@ -197,8 +197,8 @@ const AdminDashboard = () => {
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="views" fill="#1a365d" name="المشاهدات" />
-                  <Bar dataKey="comments" fill="#fbbf24" name="التعليقات" />
+                  <Bar dataKey="views" fill="#1a365d" name={t("admin.views")} />
+                  <Bar dataKey="comments" fill="#fbbf24" name={t("admin.commentsLabel")} />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
@@ -206,11 +206,11 @@ const AdminDashboard = () => {
         </TabsContent>
         
         <TabsContent value="categories" className="space-y-4">
-          <Card className="text-right">
+          <Card>
             <CardHeader>
-              <CardTitle>أداء التصنيفات</CardTitle>
+              <CardTitle>{t("admin.categoryPerformance")}</CardTitle>
               <CardDescription>
-                المقالات والمشاهدات حسب التصنيف
+                {t("admin.articlesAndViews")}
               </CardDescription>
             </CardHeader>
             <CardContent className="h-80">
@@ -222,8 +222,8 @@ const AdminDashboard = () => {
                   <YAxis yAxisId="right" orientation="right" stroke="#fbbf24" />
                   <Tooltip />
                   <Legend />
-                  <Bar yAxisId="left" dataKey="articles" fill="#1a365d" name="المقالات" />
-                  <Bar yAxisId="right" dataKey="views" fill="#fbbf24" name="المشاهدات" />
+                  <Bar yAxisId="left" dataKey="articles" fill="#1a365d" name={t("admin.totalArticles")} />
+                  <Bar yAxisId="right" dataKey="views" fill="#fbbf24" name={t("admin.views")} />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
